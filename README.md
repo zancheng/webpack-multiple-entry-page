@@ -2,7 +2,7 @@
 
 >
 
-*If you are familiar with [cooking](https://github.com/elemefe/cooking), [here](https://github.com/ElementUI/element-cooking-starter) is a starter generated with it*
+*github [cooking](https://github.com/zancheng/webpack-multiple-entry-page/)(https://github.com/zancheng/webpack-multiple-entry-page/)*
 
 ## Environment
 
