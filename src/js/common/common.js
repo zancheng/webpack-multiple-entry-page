@@ -11,4 +11,4 @@
  render: h => h(App)
  })
  */
-import '~/css/main.css'
+import '~/css/main.less'
