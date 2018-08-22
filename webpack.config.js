@@ -3,13 +3,15 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const url = require('url')
 const publicPath = '/'
+const port = '8010' // 默认一个打开浏览器的端口号 如：http://localhost:8010
 /*
 * 参考地址： https://www.cnblogs.com/legu/p/5741116.html
 *
 * */
-var glob = require('glob')
+const glob = require('glob')
 function getEntry(globPath, pathDir) {
     var files = glob.sync(globPath);
     var entries = {},
@@ -48,6 +50,9 @@ for (var key in htmls) {
         })
     )
 }
+HtmlPlugin.push(
+    new OpenBrowserPlugin({ url: 'http://localhost:'+port })
+)
 module.exports = (options = {}) => ({
   /*entry: {
     vendor: './src/vendor',
@@ -78,9 +83,19 @@ module.exports = (options = {}) => ({
           use: "css-loader"
         })
       },
+      /*{
+        test: /\.less$/,
+        //下面两行，作用相同，选择自己比较喜欢的样式即可
+        loader: 'style-loader!css-loader!less-loader'
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'less-loader'
+        ]
+      },*/
       {
         test: /\.less$/,
-        loader: ExtractTextPlugin.extract('css!less')
+        loader: ExtractTextPlugin.extract('css-loader!less-loader')
       },
       {
         test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
@@ -102,7 +117,7 @@ module.exports = (options = {}) => ({
   },
   devServer: {
     host: '127.0.0.1',
-    port: 8010,
+    port: port,
     proxy: {
       '/api/': {
         target: 'http://127.0.0.1:8080',
