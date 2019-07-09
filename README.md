@@ -2,7 +2,7 @@
 
 >
 
-*github(https://github.com/zancheng/webpack-multiple-entry-page/)(https://github.com/zancheng/webpack-multiple-entry-page/)*
+*github(https://github.com/zancheng/webpack-multiple-entry-page/)*
 
 ## Environment
 
