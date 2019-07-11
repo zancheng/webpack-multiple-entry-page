@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const url = require('url')
-const publicPath = '/'
+const publicPath = './'
 const port = '8010' // 默认一个打开浏览器的端口号 如：http://localhost:8010
 /*
 * 参考地址： https://www.cnblogs.com/legu/p/5741116.html
@@ -36,7 +36,7 @@ var entries = {};
 var HtmlPlugin = [];
 for (var key in htmls) {
     entries[key] = htmls[key].replace('.html', '.js')
-    console.info(entries[key])
+    console.info(entries)
     entries['common'] = '~/js/common/common.js'
     entries['nav'] = '~/js/common/nav.js'
     HtmlPlugin.push(
@@ -61,9 +61,9 @@ module.exports = (options = {}) => ({
   entry: entries,
   output: {
     path: resolve(__dirname, 'dist'),
-    filename: options.dev ? '[name].js' : '[name].js?[chunkhash]',
+    publicPath: options.dev ? '/' : './',
+     filename: options.dev ? '[name].js' : '[name].js?[chunkhash]',
     chunkFilename: '[id].js?[chunkhash]'
-    /*publicPath: options.dev ? '/assets/' : publicPath*/
   },
   module: {
     rules: [{
@@ -71,16 +71,40 @@ module.exports = (options = {}) => ({
         use: ['vue-loader']
       },
       {
+            test: /\.html$/,
+            loader: 'html-loader'
+      },
+      {
         test: /\.js$/,
         use: ['babel-loader'],
         exclude: /node_modules/
       },
       {
+        test: /\.js$/,
+        use: {
+            loader: 'eslint-loader',
+            options: {
+                formatter: require('eslint-friendly-formatter') // 默认的错误提示方式
+            }
+        },
+        enforce: 'pre', // 编译前检查
+        exclude: /node_modules/, // 不检测的文件
+        include: [resolve(__dirname) + '/src'], // 要检查的目录
+      },
+      {
         test:/\.css$/,
         //注意：这里还需要更改一下
         use:ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader"
+          use: [{
+              loader: 'style-loader'
+          },{
+              loader: 'css-loader'
+          },{
+              loader: 'postcss-loader'
+          },
+          {
+              loader: "file-loader"
+          }]
         })
       },
       /*{
@@ -93,16 +117,30 @@ module.exports = (options = {}) => ({
           'less-loader'
         ]
       },*/
-      {
+      /*{
         test: /\.less$/,
         loader: ExtractTextPlugin.extract('css-loader!less-loader')
+      },*/
+      {
+        test: /\.scss/,
+        use: [{
+            loader: 'style-loader'
+        }, {
+            loader: 'css-loader'
+        }, {
+            loader: 'sass-loader'
+        },{
+            loader: 'postcss-loader'
+        }]
       },
       {
         test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
         use: [{
           loader: 'url-loader',
           options: {
-            limit: 10000
+            limit: 1000,
+            //placeholder 占位符
+            name: 'assets/[name]-[hash:5].[ext]',//保持打包后的图片名字和原来一样
           }
         }]
       }
@@ -131,5 +169,5 @@ module.exports = (options = {}) => ({
       index: url.parse(options.dev ? '/assets/' : publicPath).pathname
     }
   },
-  devtool: options.dev ? '#eval-source-map' : '#source-map'
+  devtool: options.dev ? '#eval-source-map' : false
 })
