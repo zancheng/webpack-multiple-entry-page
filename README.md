@@ -1,4 +1,4 @@
-# webpack  Multi entry page template
+# webpack多入口页面打包 webpack  Multi entry page template 
 
 >
 
