@@ -138,9 +138,9 @@ module.exports = (options = {}) => ({
         use: [{
           loader: 'url-loader',
           options: {
-            limit: 1000,
+            limit: 10000,
             //placeholder 占位符
-            name: 'assets/[name]-[hash:5].[ext]',//保持打包后的图片名字和原来一样
+            name: 'assets/[name]-[hash].[ext]',//保持打包后的图片名字和原来一样
           }
         }]
       }
