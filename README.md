@@ -6,7 +6,8 @@
 
 ## Environment
 
-`Node >= 6`
+`Node >= 4
+npm >= 3`
 
 ## Start
 
