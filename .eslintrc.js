@@ -1,41 +1,19 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "jquery": true,
-    },
-    settings: {
-        'html/html-extensions': ['.html', '.vue'],
-        'html/indent': '+2',
-    },
-    "extends": "eslint:recommended",
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly",
-        "layui": true,
-        "layer": true,
-        "$": true
-    },
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "rules": {
-        "indent": [
-            "error",
-            4
-        ],
-        "linebreak-style": [
-            "error",
-            "windows"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "never"
-        ]
-    }
+  "root": true,
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "extends": "airbnb",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    // 强制使用一致的换行风格
+    "linebreak-style": [1,"windows"],
+    "indent": ["error", 4],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "no-console": process.env.NODE_ENV === 'production' ? 2 : 0,
+    "arrow-parens": 0
+  }
 };

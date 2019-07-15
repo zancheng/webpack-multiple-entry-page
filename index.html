@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>起步</title>
+    <!--no-cache浏览器会缓存，但刷新页面或者重新打开时 会请求服务器，服务器可以响应304，如果文件有改动就会响应200-->
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
+</head>
+<body>
+${require("./src/main.html")}
+</body>
+</html>
