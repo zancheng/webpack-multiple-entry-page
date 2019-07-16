@@ -70,7 +70,7 @@ module.exports = {
             // 设置输出文件位置
             filename: 'main.html',
             // 本地模板文件位置
-            template: './src/html/main.html',
+            template: './src/main.html',
             inject: true,
             chunks: ['main', 'another', 'polyfills'],
             minify: {
