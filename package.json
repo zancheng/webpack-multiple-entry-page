@@ -1,12 +1,12 @@
 {
-  "name": "webpack-demo",
+  "name": "webpack-multiple-entry-page",
   "sideEffects": [
     "./src/some-side-effectful-file.js"
   ],
   "version": "1.0.0",
-  "description": "",
+  "description": "webpack-multiple-entry-page",
   "private": true,
-  "keywords": [],
+  "keywords": ["webpack", "multiple-entry", "webpack-multiple-entry-page"],
   "author": "",
   "license": "ISC",
   "scripts": {
