@@ -13,10 +13,10 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     entry: {
         // index: './src/index.js',
-        another: './src/another-module.js',
-        index: './src/index.js',
-        main: './src/main.js',
-        polyfills: './src/polyfills.js',
+        another: './src/js/another-module.js',
+        index: './src/js/index.js',
+        main: './src/js/main.js',
+        polyfills: './src/js/polyfills.js',
     },
     plugins: [
         new UglifyJSPlugin({
@@ -49,10 +49,10 @@ module.exports = {
             join: ['lodash', 'join']
         }),
         // css文件提取
-        new ExtractTextPlugin('styles.[contenthash].css'),
+        new ExtractTextPlugin('./css/styles.[contenthash:7].css'),
         new HtmlWebpackPlugin({
             // 设置输出文件位置
-            filename: 'index.html',
+            filename: './html/index.html',
             // 本地模板文件位置
             template: 'index.html',
             inject: true,
@@ -68,9 +68,9 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             // 设置输出文件位置
-            filename: 'main.html',
+            filename: './html/main.html',
             // 本地模板文件位置
-            template: './src/main.html',
+            template: './src/html/main.html',
             inject: true,
             chunks: ['main', 'another', 'polyfills'],
             minify: {
@@ -84,8 +84,8 @@ module.exports = {
         })
     ],
     output: {
-        filename: '[name].js?hash=[chunkhash]',
-        chunkFilename: '[name].bundle.js',
+        filename: './js/[name].js?hash=[chunkhash:7]',
+        chunkFilename: './js/[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
     }
 };
