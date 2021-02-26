@@ -163,9 +163,8 @@ module.exports = (options = {}) => ({
         port: port,
         https: false,
         proxy: { // 设置dev运行时的代理
-            '/openweb': {
-              target: 'http://dev2.unisiot.com:53184', // 代理地址
-              // target: 'http://chk2.unisiot.com:53184', // 代理地址
+            '/api': {
+              target: 'http://localhost:53184', // 代理地址
               changeOrigin: true
           }
         },
