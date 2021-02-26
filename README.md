@@ -1,4 +1,4 @@
-# webpack多入口页面打包 webpack  Multi entry page template 
+# webpack  Multi entry page template
 
 >
 
@@ -6,8 +6,7 @@
 
 ## Environment
 
-`Node >= 4
-npm >= 3`
+`Node >= 6`
 
 ## Start
 
@@ -21,7 +20,7 @@ npm install
 ## Develop
 
 ``` bash
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:8010   http://localhost:8010/html/login/login.html
 npm run dev
 ```
 
